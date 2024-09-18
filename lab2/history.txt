@@ -1,0 +1,43 @@
+    Задание 1
+
+        cd lab2/src
+        gcc main.c swap.c -o swap_program
+        cd swap
+        gcc main.c swap.c -o swap_program
+        ./swap_program
+
+    Задание 2
+
+        nano main.c
+        nano revert_string.c
+        cd lab2/src/revert_string
+        gcc main.c revert_string.c -o revert_program
+        ./revert_program
+        ./revert_program hello
+
+    Задание 3
+
+        mkdir lib && cd lib
+        cd ..
+        gcc -c revert_string.c -o revert_string.o
+        ar rcs librevert.a revert_string.o
+ 
+        cd lib
+        gcc -c revert_string.c -fPIC -o revert_string.o
+        gcc -shared -o librevert.so revert_string.o
+        cd ..
+        gcc main.c -L./lib -lrevert -o static_program
+        cd lib
+        gcc main.c -L./lib -lrevert -o dynamic_program
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
+        ./dynamic_program hello
+        ./static_program hello
+
+    Задание 4
+
+        ./update.sh
+        cd lab2/src/tests
+        gcc tests.c -I../revert_string -L../revert_string/lib -lrevert -lcunit -o test_program
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../revert_string/lib
+        ./test_program
+
