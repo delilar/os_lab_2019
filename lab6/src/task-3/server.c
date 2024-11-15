@@ -27,15 +27,9 @@ uint64_t gcd(uint64_t a, uint64_t b) {
 
 uint64_t Factorial(const struct FactorialArgs *args) {
     uint64_t ans = 1;
-    
-    // Calculate factorial for the given range
     for (uint64_t i = args->begin; i <= args->end; i++) {
-        // Only multiply by numbers that are coprime with mod
-        if (gcd(i, args->mod) == 1) {
-            ans = MultModulo(ans, i, args->mod);
-        }
+        ans = MultModulo(ans, i, args->mod);
     }
-    
     return ans;
 }
 
